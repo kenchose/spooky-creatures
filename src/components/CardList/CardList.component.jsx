@@ -2,14 +2,14 @@ import React from "react";
 
 import "./CardList.styles.css";
 
+import Card from "../Card/Card.component";
+
 const CardList = ({ monsters }) => {
   return (
     <div className="card-list">
-      <div>
-        {monsters.map((monster) => {
-          return <h1 key={monster.id}>{monster.name}</h1>;
-        })}
-      </div>
+      {monsters.map((monster) => {
+        return <Card key={monster.id} {...monster} />;
+      })}
     </div>
   );
 };
