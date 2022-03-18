@@ -7,6 +7,7 @@ import "./App.styles.css";
 
 const App = () => {
   const [monsters, setMonsters] = useState([]);
+  const [searchMonster, setSearchMonster] = useState("");
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -16,10 +17,22 @@ const App = () => {
       });
   }, []);
 
+  const handleChange = (event) => {
+    setSearchMonster(event.target.value.toLowerCase());
+  };
+
+  const filteredSearch = monsters.filter((monster) => {
+    return monster.name.toLowerCase().includes(searchMonster);
+  });
+
   return (
     <div>
-      <Searchbox className={"serach-box"} placeholder={"search monster"} />
-      <CardList monsters={monsters} />
+      <Searchbox
+        className={"search-box"}
+        placeholder={"search monster"}
+        handleChange={handleChange}
+      />
+      <CardList monsters={filteredSearch} />
     </div>
   );
 };
